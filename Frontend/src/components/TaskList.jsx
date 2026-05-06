@@ -5,18 +5,12 @@ const STATUS_LABELS = { pending: "Pending", wip: "In Progress", done: "Done" };
 const TaskList = ({ tasks, filter, onStatusChange, onDelete }) => {
   if (tasks.length === 0) {
     return (
-      <div className="text-center py-16">
-        <p className="text-3xl mb-3 opacity-30">✦</p>
-        <p
-          style={{ fontFamily: "'Fraunces', serif" }}
-          className="text-xl font-light italic text-[#A8A29E]"
-        >
-          Nothing here yet
-        </p>
-        <p className="text-sm text-[#C4BDB8] mt-1.5">
+      <div className="text-center py-14">
+        <p className="text-4xl opacity-20">○</p>
+        <p className="text-gray-400 mt-3 text-sm">
           {filter === "all"
-            ? "Add your first task above"
-            : `No ${STATUS_LABELS[filter]?.toLowerCase()} tasks`}
+            ? "No tasks yet. Start by adding one."
+            : `No ${filter} tasks`}
         </p>
       </div>
     );
@@ -28,7 +22,6 @@ const TaskList = ({ tasks, filter, onStatusChange, onDelete }) => {
         <TaskItem
           key={task._id}
           task={task}
-          index={i}
           onStatusChange={onStatusChange}
           onDelete={onDelete}
         />

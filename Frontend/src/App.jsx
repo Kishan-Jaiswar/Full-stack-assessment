@@ -35,33 +35,31 @@ function App() {
   const filteredTasks =
     filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
 
-  // App.js
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center px-3 sm:px-6 py-6">
-      {/* Responsive Container */}
-      <div className="w-full max-w-md sm:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+    <div className="min-h-screen bg-[#f8fafc] flex justify-center px-4 py-8">
+      <div className="w-full max-w-xl">
         {/* Header */}
-        <div className="mb-5 text-center">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+        <div className="mb-6 text-center">
+          <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
             Task Manager
           </h1>
-          <p className="text-gray-500 text-xs sm:text-sm">
-            Stay organized, stay productive
+          <p className="text-gray-500 text-sm mt-1">
+            Organize your work beautifully
           </p>
         </div>
 
-        {/* Card */}
-        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6">
+        {/* Main Card */}
+        <div className="bg-white rounded-2xl shadow-sm p-5">
           {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-5">
+          <div className="flex justify-between mb-5 bg-gray-100 p-1 rounded-lg">
             {["all", "pending", "wip", "done"].map((item) => (
               <button
                 key={item}
                 onClick={() => setFilter(item)}
-                className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition ${
+                className={`flex-1 text-xs py-2 rounded-md transition ${
                   filter === item
-                    ? "bg-black text-white shadow-sm"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    ? "bg-white shadow text-gray-900"
+                    : "text-gray-500"
                 }`}
               >
                 {item.toUpperCase()}
@@ -73,6 +71,7 @@ function App() {
 
           <TaskList
             tasks={filteredTasks}
+            filter={filter}
             onStatusChange={handleStatusChange}
             onDelete={handleDelete}
           />
@@ -81,4 +80,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

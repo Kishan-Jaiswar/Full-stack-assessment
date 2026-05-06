@@ -1,65 +1,61 @@
 const TaskItem = ({ task, onStatusChange, onDelete }) => {
-  const statusStyles = {
-    pending: "text-yellow-600",
-    wip: "text-blue-600",
-    done: "text-green-600",
+  const statusColors = {
+    pending: "bg-yellow-100 text-yellow-700",
+    wip: "bg-blue-100 text-blue-700",
+    done: "bg-green-100 text-green-700",
   };
 
   const statuses = ["pending", "wip", "done"];
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-      {/* Left */}
-      <div className="flex-1">
-        <h3
-          className={`text-base font-medium ${
-            task.status === "done"
-              ? "line-through text-gray-400"
-              : "text-gray-800"
-          }`}
-        >
-          {task.title}
-        </h3>
+    <div className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-sm transition">
+      {/* Title */}
+      <h3
+        className={`text-sm font-medium ${
+          task.status === "done"
+            ? "line-through text-gray-400"
+            : "text-gray-800"
+        }`}
+      >
+        {task.title}
+      </h3>
 
+      {/* Description */}
+      {task.description && (
         <p className="text-xs text-gray-500 mt-1">{task.description}</p>
+      )}
 
-        {/* Status */}
+      {/* Footer */}
+      <div className="flex items-center justify-between mt-3">
+        {/* Status Badge */}
         <span
-          className={`text-xs font-medium mt-2 inline-block ${
-            statusStyles[task.status]
-          }`}
+          className={`text-xs px-2 py-1 rounded-full ${statusColors[task.status]}`}
         >
-          {task.status.toUpperCase()}
+          {task.status}
         </span>
-      </div>
 
-      {/* Actions */}
-      <div className="flex flex-wrap gap-2 justify-start sm:justify-end">
-        {statuses.map((status) =>
-          status !== task.status ? (
-            <button
-              key={status}
-              onClick={() => onStatusChange(task._id, status)}
-              className="text-xs px-2 py-1 rounded-md bg-gray-100 text-gray-600 active:scale-95"
-            >
-              {status}
-            </button>
-          ) : (
-            <span
-              key={status}
-              className="text-xs px-2 py-1 rounded-md bg-black text-white"
-            >
-              {status}
-            </span>
-          ),
-        )}
+        {/* Actions */}
+        <div className="flex gap-2">
+          {statuses.map(
+            (status) =>
+              status !== task.status && (
+                <button
+                  key={status}
+                  onClick={() => onStatusChange(task._id, status)}
+                  className="text-xs text-gray-400 hover:text-gray-700"
+                >
+                  {status}
+                </button>
+              ),
+          )}
 
-        <button
-          onClick={() => onDelete(task._id)}
-          className="text-xs text-red-500 active:scale-95"
-        >
-          Delete
-        </button>
+          <button
+            onClick={() => onDelete(task._id)}
+            className="text-xs text-red-400 hover:text-red-600"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
