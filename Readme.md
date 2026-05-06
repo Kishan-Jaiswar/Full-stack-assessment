@@ -129,12 +129,12 @@ http://localhost:5173
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint   | Description        |
-| ------ | ---------- | ------------------ |
-| POST   | /tasks     | Create a new task  |
-| GET    | /tasks     | Get all tasks      |
-| PATCH  | /tasks/:id | Update task status |
-| DELETE | /tasks/:id | Delete task        |
+| Method | Endpoint          | Description        |
+| ------ | ----------------- | ------------------ |
+| POST   | /api/v1/tasks     | Create a new task  |
+| GET    | /api/v1/tasks     | Get all tasks      |
+| PATCH  | /api/v1/tasks/:id | Update task status |
+| DELETE | /api/v1/tasks/:id | Delete task        |
 
 ---
 
