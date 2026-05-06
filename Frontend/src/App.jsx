@@ -23,8 +23,16 @@ function App() {
   };
 
   const handleStatusChange = async (id, status) => {
-    await api.updateTask(id, status);
-    fetchTasks();
+    setTasks((prev) =>
+      prev.map((task) => (task._id === id ? { ...task, status } : task)),
+    );
+
+    try {
+      await api.updateTask(id, status);
+    } catch (err) {
+      // rollback if API fails
+      fetchTasks();
+    }
   };
 
   const handleDelete = async (id) => {

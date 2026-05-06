@@ -5,8 +5,6 @@ const TaskItem = ({ task, onStatusChange, onDelete }) => {
     done: "bg-green-100 text-green-700",
   };
 
-  const statuses = ["pending", "wip", "done"];
-
   return (
     <div className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-sm transition">
       {/* Title */}
@@ -36,25 +34,35 @@ const TaskItem = ({ task, onStatusChange, onDelete }) => {
 
         {/* Actions */}
         <div className="flex gap-2">
-          {statuses.map(
-            (status) =>
-              status !== task.status && (
-                <button
-                  key={status}
-                  onClick={() => onStatusChange(task._id, status)}
-                  className="text-xs text-gray-400 hover:text-gray-700"
-                >
-                  {status}
-                </button>
-              ),
+          {/* MOVE FROM PENDING → WIP */}
+          {task.status === "pending" && (
+            <button
+              onClick={() => onStatusChange(task._id, "wip")}
+              className="text-xs text-blue-500 hover:text-blue-700"
+            >
+              Move to WIP
+            </button>
           )}
 
-          <button
-            onClick={() => onDelete(task._id)}
-            className="text-xs text-red-400 hover:text-red-600"
-          >
-            Delete
-          </button>
+          {/* MOVE FROM WIP → DONE */}
+          {task.status === "wip" && (
+            <button
+              onClick={() => onStatusChange(task._id, "done")}
+              className="text-xs text-green-500 hover:text-green-700"
+            >
+              Mark Done
+            </button>
+          )}
+
+          {/* DELETE ONLY WHEN DONE */}
+          {task.status === "done" && (
+            <button
+              onClick={() => onDelete(task._id)}
+              className="text-xs text-red-500 hover:text-red-700"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>
