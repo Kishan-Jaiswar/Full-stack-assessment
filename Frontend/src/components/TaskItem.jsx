@@ -6,59 +6,107 @@ const TaskItem = ({ task, onStatusChange, onDelete }) => {
   };
 
   return (
-    <div className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-sm transition">
+    <div
+      className="
+        border border-gray-200 bg-white
+        rounded-2xl p-4 sm:p-5
+        hover:shadow-md transition-all
+      "
+    >
       {/* Title */}
       <h3
-        className={`text-sm font-medium ${
-          task.status === "done"
-            ? "line-through text-gray-400"
-            : "text-gray-800"
-        }`}
+        className={`
+          text-sm sm:text-base font-semibold break-words
+          ${
+            task.status === "done"
+              ? "line-through text-gray-400"
+              : "text-gray-800"
+          }
+        `}
       >
         {task.title}
       </h3>
 
       {/* Description */}
       {task.description && (
-        <p className="text-xs text-gray-500 mt-1">{task.description}</p>
+        <p className="text-xs sm:text-sm text-gray-500 mt-2 break-words leading-relaxed">
+          {task.description}
+        </p>
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between mt-3">
-        {/* Status Badge */}
-        <span
-          className={`text-xs px-2 py-1 rounded-full ${statusColors[task.status]}`}
-        >
-          {task.status}
-        </span>
+      <div className="mt-5 flex items-center justify-between gap-3">
+        {/* Status Tag */}
+        <div>
+          <span
+            className={`
+        inline-flex items-center
+        px-3 py-1
+        rounded-full
+        text-[11px] sm:text-xs
+        font-semibold tracking-wide
+        uppercase border
+        ${statusColors[task.status]}
+      `}
+          >
+            {task.status}
+          </span>
+        </div>
 
-        {/* Actions */}
-        <div className="flex gap-2">
-          {/* MOVE FROM PENDING → WIP */}
+        {/* Action Buttons */}
+        <div>
           {task.status === "pending" && (
             <button
               onClick={() => onStatusChange(task._id, "wip")}
-              className="text-xs text-blue-500 hover:text-blue-700"
+              className="
+          h-9 px-4
+          rounded-xl
+          bg-blue-600 text-white
+          text-xs sm:text-sm font-medium
+          hover:bg-blue-700
+          active:scale-[0.98]
+          transition-all duration-200
+          shadow-sm
+          cursor-pointer
+        "
             >
               Move to WIP
             </button>
           )}
 
-          {/* MOVE FROM WIP → DONE */}
           {task.status === "wip" && (
             <button
               onClick={() => onStatusChange(task._id, "done")}
-              className="text-xs text-green-500 hover:text-green-700"
+              className="
+          h-9 px-4
+          rounded-xl
+          bg-green-600 text-white
+          text-xs sm:text-sm font-medium
+          hover:bg-green-700
+          active:scale-[0.98]
+          transition-all duration-200
+          shadow-sm
+          cursor-pointer
+        "
             >
               Mark Done
             </button>
           )}
 
-          {/* DELETE ONLY WHEN DONE */}
           {task.status === "done" && (
             <button
               onClick={() => onDelete(task._id)}
-              className="text-xs text-red-500 hover:text-red-700"
+              className="
+          h-9 px-4
+          rounded-xl
+          bg-red-600 text-white
+          text-xs sm:text-sm font-medium
+          hover:bg-red-700
+          active:scale-[0.98]
+          transition-all duration-200
+          shadow-sm
+          cursor-pointer
+        "
             >
               Delete
             </button>

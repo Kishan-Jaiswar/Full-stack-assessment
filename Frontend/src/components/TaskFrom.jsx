@@ -19,7 +19,7 @@ const TaskForm = ({ onAdd }) => {
       isValid = false;
     }
 
-    // Description validation (NOW REQUIRED)
+    // Description validation
     if (!description.trim()) {
       newErrors.description = "Description is required";
       isValid = false;
@@ -49,33 +49,40 @@ const TaskForm = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6 space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {/* Title */}
-      <input
-        className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl text-sm"
-        placeholder="Task title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      {errors.title && (
-        <p className="text-sm text-error">{errors.title}</p>
-      )}
+      <div>
+        <input
+          className="w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition"
+          placeholder="Task title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        {errors?.title && (
+          <p className="text-red-500 text-xs mt-1">{errors?.title}</p>
+        )}
+      </div>
 
       {/* Description */}
-      <textarea
-        className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl text-sm"
-        placeholder="Description (optional)"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      {errors.description && (
-        <p className="text-sm text-error">{errors.description}</p>
-      )}
+      <div>
+        <textarea
+          rows={4}
+          className="w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none resize-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition"
+          placeholder="Description..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-      {/* Submit */}
+        {errors?.description && (
+          <p className="text-red-500 text-xs mt-1">{errors?.description}</p>
+        )}
+      </div>
+
+      {/* Button */}
       <button
         type="submit"
-        className="w-full bg-gray-900 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 transition"
+        className="w-full bg-gray-900 text-white py-3 sm:py-3.5 rounded-2xl text-sm sm:text-base font-medium hover:bg-black active:scale-[0.99] transition-all"
       >
         Add Task
       </button>
