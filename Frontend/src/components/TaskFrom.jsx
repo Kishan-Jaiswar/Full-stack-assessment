@@ -53,7 +53,7 @@ const TaskForm = ({ onAdd }) => {
       {/* Title */}
       <div>
         <input
-          className="w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition"
+          className={`w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition ${errors.title && "border-red-500"}`}
           placeholder="Task title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -68,7 +68,7 @@ const TaskForm = ({ onAdd }) => {
       <div>
         <textarea
           rows={4}
-          className="w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none resize-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition"
+          className={`w-full bg-gray-50 border border-gray-200 p-3 sm:p-4 rounded-2xl text-sm sm:text-base outline-none resize-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-400 transition ${errors.description && "border-red-500"}`}
           placeholder="Description..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
